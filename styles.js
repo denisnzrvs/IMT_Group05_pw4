@@ -5,12 +5,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#ccc",
     padding: 10,
   },
-  timeContainer: {
-    flex: 2,
-    textAlign: "right",
-    justifyContent: "center",
-    resizeMode: "center",
-  },
   card: {
     marginTop: 5,
     backgroundColor: "#fff",

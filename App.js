@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://newsapi.org/v2/everything?q=bitcoin&apiKey=")
+      fetch("https://newsapi.org/v2/everything?q=bitcoin&apiKey=d12f6afd88084de3bbb291cde2087b50")
       .then((response) => response.json())
       .then((json) => setData(json.articles))
       .catch((error) => console.error(error))
@@ -57,8 +57,6 @@ const HomeScreen = ({ navigation }) => {
                   {item.title}
                 </Text>
                 <Text style={styles.author}>{item.source.name}</Text>
-              </View>
-              <View style={styles.timeContainer}>
                 <Text style={styles.time}>{item.publishedAt}</Text>
               </View>
             </View>
