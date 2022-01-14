@@ -29,7 +29,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 
   useEffect(() => {
-    fetch('https://newsapi.org/v2/everything?q=tesla&apiKey=6b5663a4cdbd4152ae8740d532e15c7a')
+    fetch('https://newsapi.org/v2/everything?q=tesla&apiKey=')
       .then((response) => response.json())
       .then((json) => setData(json.articles))
       .catch((error) => console.error(error))
