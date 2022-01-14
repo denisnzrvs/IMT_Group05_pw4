@@ -1,14 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function App() {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+
+
+
+  const Stack = createNativeStackNavigator();
+
+  const MyStack = () => {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: "Tesla news" }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  };
+
+  const HomeScreen = ({ navigation }) => {
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+
 
   useEffect(() => {
-    fetch('https://chroniclingamerica.loc.gov/search/titles/results/?terms=election&format=json&limit=50&page=2')
+    fetch('https://newsapi.org/v2/everything?q=tesla&apiKey=6b5663a4cdbd4152ae8740d532e15c7a')
       .then((response) => response.json())
-      .then((json) => setData(json.items))
+      .then((json) => setData(json.articles))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, []);
@@ -22,8 +45,7 @@ export default function App() {
           renderItem={({ item }) => (
             <View style={{marginTop: 5, backgroundColor: "#fff", padding: 14}}>
               <Text style={{ fontSize: 16, fontWeight: "bold" }}>{item.title}, {item.country}</Text>
-              <Text>{item.alt_title}</Text>
-              <Text>{item.note}</Text>
+              <Text>{item.description}</Text>
             </View>
           )}
         />
@@ -31,3 +53,5 @@ export default function App() {
     </View>
   );
 };
+
+export default MyStack;
